@@ -1,12 +1,5 @@
-# --------------------------------------------------------
-# Fast R-CNN
-# Copyright (c) 2015 Microsoft
-# Licensed under The MIT License [see LICENSE for details]
-# Written by Ross Girshick
-# --------------------------------------------------------
-__sets = {}
 from .pascal_voc import pascal_voc
-
+__sets = {}
 def _selective_search_IJCV_top_k(split, year, top_k):
     imdb = pascal_voc(split, year)
     imdb.roidb_handler = imdb.selective_search_IJCV_roidb
@@ -21,11 +14,11 @@ for year in ['2007', '2012', '0712']:
 
 def get_imdb(name):
     """Get an imdb (image database) by name."""
-    if not __sets.has_key(name):
-        print (list_imdbs())
+    if name not in __sets:
+        print((list_imdbs()))
         raise KeyError('Unknown dataset: {}'.format(name))
     return __sets[name]()
 
 def list_imdbs():
     """List all registered imdbs."""
-    return __sets.keys()
+    return list(__sets.keys())
